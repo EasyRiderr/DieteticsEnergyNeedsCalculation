@@ -25,15 +25,42 @@ import org.junit.Test;
  */
 public class EnergyNeedsCalculationsTests {
 
+	
+	private double femaleBMR_ = EnergyNeedsCalculations.getBMR(56, 19, 1.6, Gender.Female);
+	private double maleBMR_ = EnergyNeedsCalculations.getBMR(56, 23, 1.86, Gender.Male);
+	
+	
 	@Test
-	public void testBMR() {
-		double w = 56.d;
-		int a = 19;
-		double h = 1.6;
-		Gender g = Gender.Female;
+	public void testFemaleBMR() {
 		
 		// Assert the result of base metabolic rate is correct
-		assertEquals(5.74, EnergyNeedsCalculations.getBMR(w, a, h, g), 0.01);
+		assertEquals(5.7355, femaleBMR_, 0.0001);
+	}
+	
+	
+	@Test
+	public void testMaleBMR() {
+		
+		// Assert the result of base metabolic rate is correct
+		assertEquals(6.7840, maleBMR_, 0.0001);
+	}
+	
+	
+	@Test
+	public void testFemaleEnergyNeeds() {
+		double lpa = 1.;
+		
+		// Assert the result of base metabolic rate is correct
+		assertEquals(5735.5, EnergyNeedsCalculations.getEnergyNeeds(femaleBMR_, lpa), 0.1);
+	}
+	
+	
+	@Test
+	public void testMaleEnergyNeeds() {
+		double lpa = 1;
+		
+		// Assert the result of base metabolic rate is correct
+		assertEquals(6784, EnergyNeedsCalculations.getEnergyNeeds(maleBMR_, lpa), 0.1);
 	}
 
 }

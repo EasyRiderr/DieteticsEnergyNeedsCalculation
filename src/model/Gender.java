@@ -25,7 +25,7 @@ public enum Gender {
 	
 	
 	/** 
-	 * Constructor of male gender
+	 * Constructor of Gender
 	 * @param genderCoeff, The gender coefficient.
 	 */
 	Gender(double genderCoeff) {
