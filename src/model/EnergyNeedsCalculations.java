@@ -2,7 +2,6 @@
  * EnergyNeedsCalculations.java
  * 
  * This class will permit to calculate energy needs of a patient.
- * 
  * 24/01/2014 
  */
 
@@ -27,7 +26,7 @@ public class EnergyNeedsCalculations {
 	 * @param gender, The gender of the patient (male or female).
 	 * @return
 	 */
-	public static double getBMR(float weight, int age, int height, Gender gender) {
+	public static double getBMR(double weight, int age, double height, Gender gender) {
 		return gender.getGenderCoeff() * Math.pow(weight, 0.48) * Math.pow(height, 0.5) * Math.pow(age, -0.13);
 	}
 }

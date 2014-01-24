@@ -2,7 +2,6 @@
  * Gender.java
  * 
  * Describes the human gender (male or female).
- * 
  * 24/01/2014 
  */
 
