@@ -40,4 +40,15 @@ public class EnergyNeedsCalculations {
 	public static double getEnergyNeeds(double bmr, double lpa) {
 		return bmr * lpa * 1000;
 	}
+	
+	
+	/**
+	 * Return the total energy intakes required for the meal.
+	 * @param energyNeeds, Energy needs of the patient.
+	 * @param meal, The meal to calculate energy intakes.
+	 * @return The total energy intakes required for the meal in kJ.
+	 */
+	public static double getTotalNRJIntake(double energyNeeds, Meal meal) {
+		return energyNeeds * meal.getPercentageOfNRJNeeds();
+	}
 }
