@@ -36,7 +36,7 @@ public class MetabolismController {
 	public MetabolismController(Metabolism model) {
 		this.model = model;
 		
-		view = new MetabolismGUI(this, model);
+		view = new MetabolismGUI(this);
 		model.addObserver(view);
 	}
 	

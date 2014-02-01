@@ -64,6 +64,7 @@ public class Metabolism extends Observable {
 		this.gender = gender;
 		this.lpa = lpa;
 	}
+	// TODO vérifier dans chaque setter que les valeurs passées sont correctes.
 
 
 	/**
