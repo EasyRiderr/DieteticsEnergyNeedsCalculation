@@ -11,6 +11,7 @@ package model;
 import model.exception.BadCarbohydratePercentageException;
 import model.exception.BadLipidPercentageException;
 import model.exception.BadProteinPercentageException;
+import model.exception.PercentageMisallocationException;
 
 
 /**
@@ -160,6 +161,20 @@ public class EnergyNeedsCalculations {
 	 */
 	public static double getSweetenedProductsinGrams(double totalNRJIntakesNeeds) {
 		return totalNRJIntakesNeeds * 0.1 / 17.0;
+	}
+	
+	
+	/**
+	 * Asserts that the sum of proteins, lipids and carbohydrate percentages are equal to 100%.
+	 * @param proteinPercentage, The percentage of protein.
+	 * @param lipidPercentage, The percentage of lipid.
+	 * @param carbohydratePercentage, The percentage of carbohydrate.
+	 * @throws PercentageMisallocationException, The sum of proteins, lipids and carbohydrate percentages must be equal to 100%.
+	 */
+	public static void isPercentgaeCorrect(double proteinPercentage, double lipidPercentage, double carbohydratePercentage) throws PercentageMisallocationException {
+		if(proteinPercentage + lipidPercentage + carbohydratePercentage != 1.) {
+			throw new PercentageMisallocationException("The total of proteins, lipids and carbohydrate percentage must be eaqual to 100%");
+		}
 	}
 	
 }

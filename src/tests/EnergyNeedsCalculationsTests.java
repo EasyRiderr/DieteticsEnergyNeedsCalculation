@@ -17,6 +17,7 @@ import model.Meal;
 import model.exception.BadCarbohydratePercentageException;
 import model.exception.BadLipidPercentageException;
 import model.exception.BadProteinPercentageException;
+import model.exception.PercentageMisallocationException;
 
 import org.junit.Test;
 
@@ -218,6 +219,21 @@ public class EnergyNeedsCalculationsTests {
 	@Test
 	public void testSweetenedProductsInGrams() {
 		assertEquals(5.88, EnergyNeedsCalculations.getSweetenedProductsinGrams(1000), 0.01);
+	}
+	
+	
+	@Test
+	public void testPercentageCorrect() {
+		try {
+			EnergyNeedsCalculations.isPercentgaeCorrect(0.15, 0.35, 0.5);
+		} catch(PercentageMisallocationException e) {
+			fail("We catch an unexpected PercentageMisallocationException.");
+		}
+		try {
+			EnergyNeedsCalculations.isPercentgaeCorrect(0.16, 0.35, 0.5);
+			fail("A PercentageMisallocationException should have been thrown.");
+		} catch(PercentageMisallocationException e) {
+		}
 	}
 
 }
