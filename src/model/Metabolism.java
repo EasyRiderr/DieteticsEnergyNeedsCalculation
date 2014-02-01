@@ -8,10 +8,7 @@
 
 package model;
 
-import javax.swing.event.EventListenerList;
-
-import model.eventListeners.MetabolismListener;
-import model.eventObject.MetabolismChangedEvent;
+import java.util.Observable;
 
 
 /**
@@ -21,7 +18,7 @@ import model.eventObject.MetabolismChangedEvent;
  * @version 1.0
  * @see Gender
  */
-public class Metabolism {
+public class Metabolism extends Observable {
 
 	
 	/** The weight of the patient. */
@@ -40,12 +37,8 @@ public class Metabolism {
 	private Gender gender;
 	
 	
-	/** The level of physical activites. */
+	/** The level of physical activities. */
 	private double lpa;
-	
-	
-	/** The list of listeners */
-	private EventListenerList listeners;
 	
 	
 	/**
@@ -70,8 +63,6 @@ public class Metabolism {
 		this.age = age;
 		this.gender = gender;
 		this.lpa = lpa;
-		
-		listeners = new EventListenerList();
 	}
 
 
@@ -89,7 +80,9 @@ public class Metabolism {
 	public void setWeight(double weight) {
 		this.weight = weight;
 		
-		fireMetabolismChanged();
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 
@@ -107,7 +100,9 @@ public class Metabolism {
 	public void setAge(double age) {
 		this.age = age;
 		
-		fireMetabolismChanged();
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 
@@ -125,7 +120,9 @@ public class Metabolism {
 	public void setHeight(double height) {
 		this.height = height;
 		
-		fireMetabolismChanged();
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 
@@ -143,7 +140,9 @@ public class Metabolism {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 		
-		fireMetabolismChanged();
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 
@@ -161,57 +160,8 @@ public class Metabolism {
 	public void setLpa(double lpa) {
 		this.lpa = lpa;
 		
-		fireMetabolismChanged();
-	}
-	
-	
-	/**
-	 * @return the metabolism
-	 */
-	public Metabolism getMetabolism() {
-		return this;
-	}
-	
-	
-	/**
-	 * @param metabolism the metabolism to set
-	 */
-	public void setMetabolism(Metabolism metabolism) {
-		weight = metabolism.weight;
-		age = metabolism.age;
-		height = metabolism.height;
-		gender = metabolism.gender;
-		
-		fireMetabolismChanged();
-	}
-	
-	
-	/**
-	 * Add a listener to the list of listeners.
-	 * @param listener, The listener to add to the list.
-	 */
-	public void addMetabolismListener(MetabolismListener listener){
-		listeners.add(MetabolismListener.class, listener);
-	}
- 
-	
-	/**
-	 * Remove a listener to the list of listener.
-	 * @param listener, The listener to remove of the list.
-	 */
-	public void removeMetabolismListener(MetabolismListener listener){
-		 listeners.remove(MetabolismListener.class, listener);
-	}
- 
-	
-	/**
-	 * Update the value of Metabolism.
-	 */
-	public void fireMetabolismChanged(){
-		MetabolismListener[] listenerList = (MetabolismListener[])listeners.getListeners(MetabolismListener.class);
- 
-		for(MetabolismListener listener : listenerList){
-			listener.metabolismChanged(new MetabolismChangedEvent(this, getWeight(), getAge(), getHeight(), getGender()));
-		}
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 }

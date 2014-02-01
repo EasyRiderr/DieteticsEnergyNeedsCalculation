@@ -27,6 +27,6 @@ public class DieteticsEnergyNeedsCalculation {
 	public static void main(String[] args) {
 		Metabolism m = new Metabolism();
 		MetabolismController mc = new MetabolismController(m);
-		mc.displayView();
+		mc.display();
 	}
 }
