@@ -29,7 +29,7 @@ public class EnergyNeedsCalculations {
 	 * @param age, The age of the patient in years.
 	 * @param height, The height of the patient in m.
 	 * @param gender, The gender of the patient.
-	 * @return
+	 * @return The Basal Metabolic Rate of the patient.
 	 */
 	public static double getBMR(double weight, int age, double height, Gender gender) {
 		return gender.getGenderCoeff() * Math.pow(weight, 0.48) * Math.pow(height, 0.5) * Math.pow(age, -0.13);
