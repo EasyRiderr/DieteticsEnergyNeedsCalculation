@@ -26,7 +26,7 @@ public class Metabolism extends Observable {
 	
 	
 	/** The age of the patient. */
-	private double age;
+	private int age;
 	
 	
 	/** The height if the patient. */
@@ -57,14 +57,12 @@ public class Metabolism extends Observable {
 	 * @param gender, The Gender of the patient.
 	 * @param lpa, The level of physical activities of the patient.
 	 */
-	public Metabolism(double weight, double height, double age, Gender gender, double lpa) {
-		this.weight = weight;
-		this.height = height;
-		this.age = age;
-		this.gender = gender;
-		this.lpa = lpa;
+	public Metabolism(double weight, double height, int age, Gender gender, double lpa) {
+		setWeight(weight);
+		setAge(age);
+		setGender(gender);
+		setLpa(lpa);
 	}
-	// TODO vérifier dans chaque setter que les valeurs passées sont correctes.
 
 
 	/**
@@ -74,7 +72,7 @@ public class Metabolism extends Observable {
 		return weight;
 	}
 
-
+// TODO ajouter les contraintes sur les setters
 	/**
 	 * @param weight the weight to set
 	 */
@@ -90,7 +88,7 @@ public class Metabolism extends Observable {
 	/**
 	 * @return the age
 	 */
-	public double getAge() {
+	public int getAge() {
 		return age;
 	}
 
@@ -98,7 +96,7 @@ public class Metabolism extends Observable {
 	/**
 	 * @param age the age to set
 	 */
-	public void setAge(double age) {
+	public void setAge(int age) {
 		this.age = age;
 		
 		// Notify changes
