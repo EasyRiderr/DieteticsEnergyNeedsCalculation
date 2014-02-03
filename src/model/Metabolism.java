@@ -10,6 +10,11 @@ package model;
 
 import java.util.Observable;
 
+import model.exception.metabolism.IncoherentAgeException;
+import model.exception.metabolism.IncoherentHeightException;
+import model.exception.metabolism.IncoherentLpaException;
+import model.exception.metabolism.IncoherentWeightException;
+
 
 /**
  * Metabolism represent the metabolism of patients.
@@ -20,35 +25,43 @@ import java.util.Observable;
  */
 public class Metabolism extends Observable {
 
-	
+
 	/** The weight of the patient. */
 	private double weight;
-	
-	
+
+
 	/** The age of the patient. */
 	private int age;
-	
-	
+
+
 	/** The height if the patient. */
 	private double height;
-	
-	
+
+
 	/** The Gender of the patient. */
 	private Gender gender;
-	
-	
+
+
 	/** The level of physical activities. */
 	private double lpa;
-	
-	
+
+
 	/**
 	 * Default constructor of Metabolism.
 	 */
 	public Metabolism() {
-		this(56., 1.60, 19, Gender.Female, 1);
+		try {
+			setWeight(56);
+			setHeight(1.6);
+			setAge(19);
+			setGender(Gender.Female);
+			setLpa(1);
+		} catch(Exception e) {
+
+		}
 	}
-	
-	
+
+
 	/**
 	 * Constructor of Metabolism.
 	 * @param weight, The weight of the patient.
@@ -56,9 +69,14 @@ public class Metabolism extends Observable {
 	 * @param age, The age of the patient.
 	 * @param gender, The Gender of the patient.
 	 * @param lpa, The level of physical activities of the patient.
+	 * @throws IncoherentWeightException if the weight of the patient is not between 0 and 500kgs.
+	 * @throws IncoherentAgeException if the age of the patient is not between 0 and 150 years.
+	 * @throws IncoherentHeightException if the height of the patient is not between 0 and 3m.
+	 * @throws IncoherentLpaException if the level of physical activities of the patient is not between 0 and 2.
 	 */
-	public Metabolism(double weight, double height, int age, Gender gender, double lpa) {
+	public Metabolism(double weight, double height, int age, Gender gender, double lpa) throws IncoherentWeightException, IncoherentAgeException, IncoherentHeightException, IncoherentLpaException {
 		setWeight(weight);
+		setHeight(height);
 		setAge(age);
 		setGender(gender);
 		setLpa(lpa);
@@ -72,13 +90,17 @@ public class Metabolism extends Observable {
 		return weight;
 	}
 
-// TODO ajouter les contraintes sur les setters
+
 	/**
 	 * @param weight the weight to set
+	 * @throws IncoherentWeightException if the weight of the patient is not between 0 and 500kgs.
 	 */
-	public void setWeight(double weight) {
+	public void setWeight(double weight) throws IncoherentWeightException {
+		if(weight <= 0 || weight > 500) {
+			throw new IncoherentWeightException("The weight of the patient must be between 0 and 500kgs.");
+		}
 		this.weight = weight;
-		
+
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
@@ -95,10 +117,14 @@ public class Metabolism extends Observable {
 
 	/**
 	 * @param age the age to set
+	 * @throws IncoherentAgeException if the age of the patient is not between 0 and 150 years.
 	 */
-	public void setAge(int age) {
+	public void setAge(int age) throws IncoherentAgeException {
+		if(age <= 0 || age > 150) {
+			throw new IncoherentAgeException("The age of the patient must be between 0 and 150 years.");
+		}
 		this.age = age;
-		
+
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
@@ -115,10 +141,14 @@ public class Metabolism extends Observable {
 
 	/**
 	 * @param height the height to set
+	 * @throws IncoherentHeightException if the height of the patient is not between 0 and 3m.
 	 */
-	public void setHeight(double height) {
+	public void setHeight(double height) throws IncoherentHeightException {
+		if(height <= 0 || height > 3) {
+			throw new IncoherentHeightException("The height of the patient must be between 0 and 3m.");
+		}
 		this.height = height;
-		
+
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
@@ -138,7 +168,7 @@ public class Metabolism extends Observable {
 	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
-		
+
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
@@ -155,10 +185,14 @@ public class Metabolism extends Observable {
 
 	/**
 	 * @param lpa the lpa to set
+	 * @throws IncoherentLpaException if the level of physical activities of the patient is not between 0 and 2.
 	 */
-	public void setLpa(double lpa) {
+	public void setLpa(double lpa) throws IncoherentLpaException {
+		if(lpa < 0 || lpa > 2) {
+			throw new IncoherentLpaException("The level of physical activities of the patient must be between 0 and 2.");
+		}
 		this.lpa = lpa;
-		
+
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);

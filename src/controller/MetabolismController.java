@@ -9,6 +9,10 @@
 package controller;
 
 import model.Metabolism;
+import model.exception.metabolism.IncoherentAgeException;
+import model.exception.metabolism.IncoherentHeightException;
+import model.exception.metabolism.IncoherentLpaException;
+import model.exception.metabolism.IncoherentWeightException;
 import view.MetabolismGUI;
 
 
@@ -43,8 +47,12 @@ public class MetabolismController {
 	/**
 	 * Notify the model that metabolism values have been changed.
 	 * @param metabolism, The new metabolism.
+	 * @throws IncoherentWeightException if the weight of the patient is not between 0 and 500kgs.
+	 * @throws IncoherentAgeException if the age of the patient is not between 0 and 150 years.
+	 * @throws IncoherentHeightException if the height of the patient is not between 0 and 3m.
+	 * @throws IncoherentLpaException if the level of physical activities of the patient is not between 0 and 2.
 	 */
-	public void notifyMetabolismChanged(Metabolism metabolism) {
+	public void notifyMetabolismChanged(Metabolism metabolism) throws IncoherentWeightException, IncoherentAgeException, IncoherentHeightException, IncoherentLpaException {
 		model.setWeight(metabolism.getWeight());
 		model.setAge(metabolism.getAge());
 		model.setGender(metabolism.getGender());

@@ -198,7 +198,12 @@ public class MetabolismGUI implements ActionListener {
 		}
 
 		// Notify model of changes
-		Metabolism m = new Metabolism(weight, height, age, gender, lpa);
+		Metabolism m = null;
+		try {
+			m = new Metabolism(weight, height, age, gender, lpa);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return m;
 	}
@@ -208,8 +213,12 @@ public class MetabolismGUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Metabolism m = getUserData();
 		if(m != null) {
-			controller.notifyMetabolismChanged(m);
-			close();
+			try {
+				controller.notifyMetabolismChanged(m);
+				close();
+			} catch(Exception exc) {
+				JOptionPane.showMessageDialog(frame, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
