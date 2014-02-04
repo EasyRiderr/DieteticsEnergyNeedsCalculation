@@ -6,7 +6,7 @@
  */
 
 
-package model.exception.metabolism;
+package model.metabolism;
 
 
 /**

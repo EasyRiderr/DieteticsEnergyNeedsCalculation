@@ -9,12 +9,12 @@
 package tests;
 
 import static org.junit.Assert.*;
-import model.Gender;
-import model.Metabolism;
-import model.exception.metabolism.IncoherentAgeException;
-import model.exception.metabolism.IncoherentHeightException;
-import model.exception.metabolism.IncoherentLpaException;
-import model.exception.metabolism.IncoherentWeightException;
+import model.metabolism.Gender;
+import model.metabolism.IncoherentAgeException;
+import model.metabolism.IncoherentHeightException;
+import model.metabolism.IncoherentLpaException;
+import model.metabolism.IncoherentWeightException;
+import model.metabolism.Metabolism;
 
 import org.junit.Test;
 

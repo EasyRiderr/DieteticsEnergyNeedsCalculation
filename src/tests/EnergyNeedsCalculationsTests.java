@@ -12,12 +12,12 @@ package tests;
 
 import static org.junit.Assert.*;
 import model.EnergyNeedsCalculations;
-import model.Gender;
 import model.Meal;
 import model.exception.BadCarbohydratePercentageException;
 import model.exception.BadLipidPercentageException;
 import model.exception.BadProteinPercentageException;
 import model.exception.PercentageMisallocationException;
+import model.metabolism.Gender;
 
 import org.junit.Test;
 

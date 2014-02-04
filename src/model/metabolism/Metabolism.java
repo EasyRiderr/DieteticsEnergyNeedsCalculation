@@ -6,14 +6,9 @@
  */
 
 
-package model;
+package model.metabolism;
 
 import java.util.Observable;
-
-import model.exception.metabolism.IncoherentAgeException;
-import model.exception.metabolism.IncoherentHeightException;
-import model.exception.metabolism.IncoherentLpaException;
-import model.exception.metabolism.IncoherentWeightException;
 
 
 /**

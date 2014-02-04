@@ -24,8 +24,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import controller.MetabolismController;
-import model.Gender;
-import model.Metabolism;
+import model.metabolism.Gender;
+import model.metabolism.Metabolism;
 
 
 /**

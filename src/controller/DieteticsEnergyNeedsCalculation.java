@@ -8,7 +8,7 @@
 
 package controller;
 
-import model.Metabolism;
+import model.metabolism.Metabolism;
 
 
 /**
