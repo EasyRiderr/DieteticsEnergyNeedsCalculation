@@ -8,10 +8,11 @@
 
 package model;
 
-import model.exception.BadCarbohydratePercentageException;
-import model.exception.BadLipidPercentageException;
-import model.exception.BadProteinPercentageException;
-import model.exception.PercentageMisallocationException;
+import model.mealRepartition.BadCarbohydratePercentageException;
+import model.mealRepartition.BadLipidPercentageException;
+import model.mealRepartition.BadProteinPercentageException;
+import model.mealRepartition.Meal;
+import model.mealRepartition.PercentageMisallocationException;
 import model.metabolism.Gender;
 
 

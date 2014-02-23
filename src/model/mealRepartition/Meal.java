@@ -6,7 +6,7 @@
  */
 
 
-package model;
+package model.mealRepartition;
 
 
 /**

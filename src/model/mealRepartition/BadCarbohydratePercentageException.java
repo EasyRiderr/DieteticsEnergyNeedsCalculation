@@ -6,7 +6,7 @@
  */
 
 
-package model.exception;
+package model.mealRepartition;
 
 
 /**
