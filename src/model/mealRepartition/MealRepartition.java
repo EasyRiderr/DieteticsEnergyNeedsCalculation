@@ -31,19 +31,23 @@ public class MealRepartition extends Observable {
 
 	/** Permit to know if the patient take a snack. */
 	private boolean takeASnack;
+	
+	/** Energy needs of the patient. */
+	private double energyNeeds;
 
 
 	/**
 	 * The default constructor of MealRepartition.
 	 */
-	public MealRepartition() {
+	/*public MealRepartition() {
 		try {
 			setCarbohydratePercentage(.5);
 			setLipidPercentage(.35);
 			setProteinPercentage(.15);
 		} catch(Exception e) {}
 		setTakeASnack(true);
-	}
+		setEnergyNeeds(6000);
+	}*/
 
 
 	/**
@@ -52,17 +56,19 @@ public class MealRepartition extends Observable {
 	 * @param lipidPercentage, The percentage of lipid allowed for the patient by meal.
 	 * @param proteinPercentage, The percentage of protein allowed for the patient by meal.
 	 * @param takeASnack, True if the patient take a snack, false otherwise.
+	 * @param energyNeeds, Energy needs of the patient.
 	 * @throws BadCarbohydratePercentageException, The carbohydrate percentage must be between 50% and 55%.
 	 * @throws BadLipidPercentageException, The lipid percentage must be between 35% and 40%.
 	 * @throws BadProteinPercentageException, The protein percentage must be between 12% and 15%.
 	 * @throws PercentageMisallocationException, The sum of proteins, lipids and carbohydrate percentages must be equal to 100%.
 	 */
-	public MealRepartition(double carbohydratePercentage, double lipidPercentage, double proteinPercentage, boolean takeASnack) throws BadCarbohydratePercentageException, BadLipidPercentageException, BadProteinPercentageException, PercentageMisallocationException {
+	public MealRepartition(double carbohydratePercentage, double lipidPercentage, double proteinPercentage, boolean takeASnack, double energyNeeds) throws BadCarbohydratePercentageException, BadLipidPercentageException, BadProteinPercentageException, PercentageMisallocationException {
 		setCarbohydratePercentage(carbohydratePercentage);
 		setLipidPercentage(lipidPercentage);
 		setProteinPercentage(proteinPercentage);
 		checkRepartition();
 		setTakeASnack(takeASnack);
+		setEnergyNeeds(energyNeeds);
 	}
 
 
@@ -74,6 +80,26 @@ public class MealRepartition extends Observable {
 		if(carbohydratePercentage + lipidPercentage + proteinPercentage != 1) {
 			throw new PercentageMisallocationException("The total of proteins, lipids and carbohydrate percentage must be equal to 100%.");
 		}
+	}
+
+
+	/**
+	 * @return the energyNeeds
+	 */
+	public double getEnergyNeeds() {
+		return energyNeeds;
+	}
+
+
+	/**
+	 * @param energyNeeds the energyNeeds to set
+	 */
+	public void setEnergyNeeds(double energyNeeds) {
+		this.energyNeeds = energyNeeds;
+
+		// Notify changes
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 
@@ -166,5 +192,85 @@ public class MealRepartition extends Observable {
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
+	}
+	
+	
+	/**
+	 * Return the total energy intakes required for the meal.
+	 * @param energyNeeds, Energy needs of the patient.
+	 * @param meal, The meal to calculate energy intakes.
+	 * @return The total energy intakes required for the meal in kJ.
+	 */
+	public double getTotalNRJIntakeNeeds(double energyNeeds, Meal meal) {
+		return energyNeeds * meal.getPercentageOfNRJNeeds();
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of animal proteins that can be consumed by the patient.
+	 * @param meal, The meal to compute animal proteins.
+	 * @return The weight <i>(in grams)</i> of animal proteins that can be consumed by the patient.
+	 */
+	public double getAnimalProteinsInGrams(Meal meal) {
+		return (energyNeeds * meal.getPercentageOfNRJNeeds() * proteinPercentage / 2.0) / 17.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of vegetable proteins that can be consumed by the patient.
+	 * @param meal, The meal to compute vegetable proteins.
+	 * @return The weight <i>(in grams)</i> of animal proteins that can be consumed by the patient.
+	 */
+	public double getVegetableProteinsInGrams(Meal meal) {
+		return (energyNeeds * meal.getPercentageOfNRJNeeds() * proteinPercentage / 2.0) / 17.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of animal lipid that can be consumed by the patient.
+	 * @param meal, The meal to compute animal lipid.
+	 * @return The weight <i>(in grams)</i> of animal lipid that can be consumed by the patient.
+	 */
+	public double getAnimalLipidInGrams(Meal meal) {
+		return (energyNeeds * meal.getPercentageOfNRJNeeds() * lipidPercentage / 2.0) / 38.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of vegetable lipid that can be consumed by the patient.
+	 * @param meal, The meal to compute vegetable lipid.
+	 * @return The weight <i>(in grams)</i> of vegetable lipid that can be consumed by the patient.
+	 */
+	public double getVegetableLipidInGrams(Meal meal) {
+		return (energyNeeds * meal.getPercentageOfNRJNeeds() * lipidPercentage / 2.0) / 38.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of complex carbohydrate that can be consumed by the patient.
+	 * @param meal, The meal to compute complex carbohydrate.
+	 * @return The weight <i>(in grams)</i> of complex carbohydrate that can be consumed by the patient.
+	 */
+	public double getComplexCarbohydrate(Meal meal) {
+		return energyNeeds * meal.getPercentageOfNRJNeeds() * carbohydratePercentage * 0.55 / 17.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of simple carbohydrate that can be consumed by the patient.
+	 * @param meal, The meal to compute simple carbohydrate.
+	 * @return The weight <i>(in grams)</i> of simple carbohydrate that can be consumed by the patient.
+	 */
+	public double getSimpleCarbohydrate(Meal meal) {
+		return energyNeeds * meal.getPercentageOfNRJNeeds() * carbohydratePercentage * 0.45 / 17.0;
+	}
+	
+	
+	/**
+	 * Return the weight <i>(in grams)</i> of sweetened products that can be consumed by the patient.
+	 * @return The weight <i>(in grams)</i> of sweetened products that can be consumed by the patient.
+	 */
+	public double getSweetenedProductsinGrams() {
+		return energyNeeds * 0.1 / 17.0;
 	}
 }
