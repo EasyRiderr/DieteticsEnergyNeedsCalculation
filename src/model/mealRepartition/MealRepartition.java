@@ -39,7 +39,7 @@ public class MealRepartition extends Observable {
 	/**
 	 * The default constructor of MealRepartition.
 	 */
-	/*public MealRepartition() {
+	public MealRepartition() {
 		try {
 			setCarbohydratePercentage(.5);
 			setLipidPercentage(.35);
@@ -47,7 +47,7 @@ public class MealRepartition extends Observable {
 		} catch(Exception e) {}
 		setTakeASnack(true);
 		setEnergyNeeds(6000);
-	}*/
+	}
 
 
 	/**
@@ -192,17 +192,6 @@ public class MealRepartition extends Observable {
 		// Notify changes
 		this.setChanged();
 		this.notifyObservers(this);
-	}
-	
-	
-	/**
-	 * Return the total energy intakes required for the meal.
-	 * @param energyNeeds, Energy needs of the patient.
-	 * @param meal, The meal to calculate energy intakes.
-	 * @return The total energy intakes required for the meal in kJ.
-	 */
-	public double getTotalNRJIntakeNeeds(double energyNeeds, Meal meal) {
-		return energyNeeds * meal.getPercentageOfNRJNeeds();
 	}
 	
 	
