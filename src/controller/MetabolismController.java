@@ -61,6 +61,8 @@ public class MetabolismController {
 			model.setHeight(metabolism.getHeight());
 			model.setLpa(metabolism.getLpa());
 			
+			view.close();
+			
 			// Go to the next screen
 			MealRepartition mr = new MealRepartition();
 			mr.setEnergyNeeds(model.getEnergyNeeds());

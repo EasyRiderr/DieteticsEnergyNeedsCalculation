@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -29,7 +30,6 @@ import model.mealRepartition.BadCarbohydratePercentageException;
 import model.mealRepartition.BadLipidPercentageException;
 import model.mealRepartition.BadProteinPercentageException;
 import model.mealRepartition.MealRepartition;
-import model.mealRepartition.PercentageMisallocationException;
 
 
 /**
@@ -147,28 +147,38 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		okBtn = new JButton("Ok");
 		okBtn.addActionListener(this);
 		container.add(okBtn);
-		
+
 		frame.pack();
+	}
+
+
+	/**
+	 * Get the user data and return the corresponding mealrepartition object.
+	 * @return The mealrepartition object corresponding to the user data.
+	 * @throws BadCarbohydratePercentageException
+	 * @throws BadLipidPercentageException
+	 * @throws BadProteinPercentageException
+	 */
+	private MealRepartition getUserData() throws BadCarbohydratePercentageException, BadLipidPercentageException, BadProteinPercentageException {
+		MealRepartition mr = new MealRepartition();
+		mr.setCarbohydratePercentage(carbohydratePercentageSlider.getValue() / 100.);
+		mr.setLipidPercentage(lipidPercentageSlider.getValue() / 100.);
+		mr.setProteinPercentage(proteinPercentageSlider.getValue() / 100.);
+		mr.setTakeASnack(takeASnackCheckBox.isSelected());
+		
+		return mr;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		try {
-			controller.notifyMealRepartitionChanged(12, 12, 12, true);
-		} catch (BadCarbohydratePercentageException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadLipidPercentageException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadProteinPercentageException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PercentageMisallocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MealRepartition mr = getUserData();
+			if(mr != null) {
+				controller.notifyMealRepartitionChanged(mr);
+			}
+		} catch(Exception exc) {
+			JOptionPane.showMessageDialog(frame, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

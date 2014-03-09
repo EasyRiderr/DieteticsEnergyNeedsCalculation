@@ -43,26 +43,6 @@ public class MealRepartitionController {
 	
 	
 	/**
-	 * Notify the model that meal repartition values have been changed.
-	 * @param carbohydratePercentage, The carbohydrate percentage wished for the meal.
-	 * @param lipidPercentage, The lipid percentage wished for the meal.
-	 * @param proteinPercentage, The protein percentage wished for the meal.
-	 * @param takeASnack, Permit to know if the patient take a snack.
-	 * @throws BadCarbohydratePercentageException, The carbohydrate percentage must be between 50% and 55%.
-	 * @throws BadLipidPercentageException, The lipid percentage must be between 35% and 40%.
-	 * @throws BadProteinPercentageException, The protein percentage must be between 12% and 15%.
-	 * @throws PercentageMisallocationException, The sum of proteins, lipids and carbohydrate percentages must be equal to 100%.
-	 */
-	public void notifyMealRepartitionChanged(double carbohydratePercentage, double lipidPercentage, double proteinPercentage, boolean takeASnack) throws BadCarbohydratePercentageException, BadLipidPercentageException, BadProteinPercentageException, PercentageMisallocationException {
-		model.setCarbohydratePercentage(carbohydratePercentage);
-		model.setLipidPercentage(lipidPercentage);
-		model.setProteinPercentage(proteinPercentage);
-		model.setTakeASnack(takeASnack);
-		model.checkRepartition();
-	}
-	
-	
-	/**
 	 * Display the meal repartition view.
 	 */
 	public void display() {
@@ -74,6 +54,25 @@ public class MealRepartitionController {
 	 * Close the meal repartition view.
 	 */
 	public void close() {
+		view.close();
+	}
+
+
+	/**
+	 * Notify the model that meal repartition values have been changed.
+	 * @param mr, the new MealRepartition.
+	 * @throws BadCarbohydratePercentageException, The carbohydrate percentage must be between 50% and 55%.
+	 * @throws BadLipidPercentageException, The lipid percentage must be between 35% and 40%.
+	 * @throws BadProteinPercentageException, The protein percentage must be between 12% and 15%.
+	 * @throws PercentageMisallocationException, The sum of proteins, lipids and carbohydrate percentages must be equal to 100%.
+	 */
+	public void notifyMealRepartitionChanged(MealRepartition mr) throws BadCarbohydratePercentageException, BadLipidPercentageException, BadProteinPercentageException, PercentageMisallocationException {
+		model.setCarbohydratePercentage(mr.getCarbohydratePercentage());
+		model.setLipidPercentage(mr.getLipidPercentage());
+		model.setProteinPercentage(mr.getProteinPercentage());
+		model.setTakeASnack(mr.isTakeASnack());
+		model.checkRepartition();
+		
 		view.close();
 	}
 }
