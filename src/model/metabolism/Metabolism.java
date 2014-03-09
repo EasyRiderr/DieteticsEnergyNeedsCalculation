@@ -196,10 +196,6 @@ public class Metabolism extends Observable {
 	
 	/**
 	 * Return the Basal Metabolic Rate of the patient.
-	 * @param weight, The weight of the patient in kg.
-	 * @param age, The age of the patient in years.
-	 * @param height, The height of the patient in m.
-	 * @param gender, The gender of the patient.
 	 * @return The Basal Metabolic Rate of the patient.
 	 */
 	public double getBMR() {
@@ -209,8 +205,6 @@ public class Metabolism extends Observable {
 	
 	/**
 	 * Return the Energy needs of the patient.
-	 * @param bmr, The Base Metabolic Rate of the patient.
-	 * @param lpa, The level of physical activity of the patient.
 	 * @return The energy needs of the patient in kJ.
 	 */
 	public double getEnergyNeeds() {

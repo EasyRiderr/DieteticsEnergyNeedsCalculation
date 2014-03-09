@@ -215,7 +215,6 @@ public class MetabolismGUI implements ActionListener {
 		if(m != null) {
 			try {
 				controller.notifyMetabolismChanged(m);
-				close();
 			} catch(Exception exc) {
 				JOptionPane.showMessageDialog(frame, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

@@ -22,12 +22,18 @@ public class MealRepartition extends Observable {
 
 	/** The carbohydrate percentage wished for the meal. */
 	private double carbohydratePercentage;
+	public static final double CARBOHYDRATE_PERCENTAGE_MIN = .5;
+	public static final double CARBOHYDRATE_PERCENTAGE_MAX = .55;
 
 	/** The lipid percentage wished for the meal. */
 	private double lipidPercentage;
+	public static final double LIPID_PERCENTAGE_MIN = .35;
+	public static final double LIPID_PERCENTAGE_MAX = .4;
 
 	/** The protein percentage wished for the meal. */
 	private double proteinPercentage;
+	public static final double PROTEIN_PERCENTAGE_MIN = .12;
+	public static final double PROTEIN_PERCENTAGE_MAX = .15;
 
 	/** Permit to know if the patient take a snack. */
 	private boolean takeASnack;
@@ -41,9 +47,9 @@ public class MealRepartition extends Observable {
 	 */
 	public MealRepartition() {
 		try {
-			setCarbohydratePercentage(.5);
-			setLipidPercentage(.35);
-			setProteinPercentage(.15);
+			setCarbohydratePercentage(CARBOHYDRATE_PERCENTAGE_MIN);
+			setLipidPercentage(LIPID_PERCENTAGE_MIN);
+			setProteinPercentage(PROTEIN_PERCENTAGE_MAX);
 		} catch(Exception e) {}
 		setTakeASnack(true);
 		setEnergyNeeds(6000);
@@ -116,8 +122,8 @@ public class MealRepartition extends Observable {
 	 * @throws BadCarbohydratePercentageException, The carbohydrate percentage must be between 50% and 55%.
 	 */
 	public void setCarbohydratePercentage(double carbohydratePercentage) throws BadCarbohydratePercentageException {
-		if(carbohydratePercentage <.5 || carbohydratePercentage > .55) {
-			throw new BadCarbohydratePercentageException("The percentage of carbohydrate must be between 50% and 55%.");
+		if(carbohydratePercentage <CARBOHYDRATE_PERCENTAGE_MIN || carbohydratePercentage > CARBOHYDRATE_PERCENTAGE_MAX) {
+			throw new BadCarbohydratePercentageException("The percentage of carbohydrate must be between " + (int)(CARBOHYDRATE_PERCENTAGE_MIN * 100) + "% and " + (int)(CARBOHYDRATE_PERCENTAGE_MAX * 100) + "%.");
 		}
 		this.carbohydratePercentage = carbohydratePercentage;
 
@@ -140,8 +146,8 @@ public class MealRepartition extends Observable {
 	 * @throws BadLipidPercentageException, The lipid percentage must be between 35% and 40%.
 	 */
 	public void setLipidPercentage(double lipidPercentage) throws BadLipidPercentageException  {
-		if(lipidPercentage < 0.35 || lipidPercentage > 0.4) {
-			throw new BadLipidPercentageException("The percentage of lipid must be between 35% and 40%.");
+		if(lipidPercentage < LIPID_PERCENTAGE_MIN || lipidPercentage > LIPID_PERCENTAGE_MAX) {
+			throw new BadLipidPercentageException("The percentage of lipid must be between " + (int)(LIPID_PERCENTAGE_MIN * 100) + "% and " + (int)(LIPID_PERCENTAGE_MAX * 100) + "%.");
 		}
 		this.lipidPercentage = lipidPercentage;
 
@@ -164,8 +170,8 @@ public class MealRepartition extends Observable {
 	 * @throws BadProteinPercentageException, The protein percentage must be between 12% and 15%.
 	 */
 	public void setProteinPercentage(double proteinPercentage) throws BadProteinPercentageException {
-		if(proteinPercentage < 0.12 || proteinPercentage > 0.15) {
-			throw new BadProteinPercentageException("The percentage of protein must be between 12% and 15%.");
+		if(proteinPercentage < PROTEIN_PERCENTAGE_MIN || proteinPercentage > PROTEIN_PERCENTAGE_MAX) {
+			throw new BadProteinPercentageException("The percentage of protein must be between " + (int)(PROTEIN_PERCENTAGE_MIN * 100) + "% and " + (int)(PROTEIN_PERCENTAGE_MAX * 100) + "%.");
 		}
 		this.proteinPercentage = proteinPercentage;
 

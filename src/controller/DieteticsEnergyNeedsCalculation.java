@@ -8,6 +8,7 @@
 
 package controller;
 
+import model.mealRepartition.MealRepartition;
 import model.metabolism.Metabolism;
 
 
@@ -25,8 +26,11 @@ public class DieteticsEnergyNeedsCalculation {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Metabolism m = new Metabolism();
+		/*Metabolism m = new Metabolism();
 		MetabolismController mc = new MetabolismController(m);
-		mc.display();
+		mc.display();*/
+		MealRepartition mr = new MealRepartition();
+		MealRepartitionController mrc = new MealRepartitionController(mr);
+		mrc.display();
 	}
 }
