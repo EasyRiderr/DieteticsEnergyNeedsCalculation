@@ -9,6 +9,7 @@
 package model.mealRepartition;
 
 import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -105,7 +106,7 @@ public class MealRepartition extends Observable {
 
 		// Notify changes
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 
 
@@ -129,7 +130,7 @@ public class MealRepartition extends Observable {
 
 		// Notify changes
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 
 
@@ -153,7 +154,7 @@ public class MealRepartition extends Observable {
 
 		// Notify changes
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 
 
@@ -177,7 +178,7 @@ public class MealRepartition extends Observable {
 
 		// Notify changes
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 
 
@@ -197,7 +198,7 @@ public class MealRepartition extends Observable {
 
 		// Notify changes
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	
@@ -267,5 +268,20 @@ public class MealRepartition extends Observable {
 	 */
 	public double getSweetenedProductsinGrams() {
 		return energyNeeds * 0.1 / 17.0;
+	}
+	
+	
+	/**
+	 * Add an observer to the MealRepartition class
+	 * @param o, The new Observer to add.
+	 */
+	public void setObservers(Observer o) {
+		this.addObserver(o);
+	}
+	
+	
+	public void displayObservers() {
+		setChanged();
+		notifyObservers(getClass());
 	}
 }

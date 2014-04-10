@@ -9,12 +9,12 @@
 package view;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -40,6 +40,7 @@ import model.mealRepartition.MealRepartition;
  * @see MealRepartition
  */
 public class MealRepartitionGUI implements ActionListener, FocusListener, ChangeListener {
+	
 	/** The frame of the GUI. */
 	private JFrame frame;
 
@@ -87,10 +88,10 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		// Set properties to the frame
 		frame = new JFrame("Dietetics Energy needs calcultaion.");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new FlowLayout());
-		frame.setLocationRelativeTo(null);
 
 		Container container = frame.getContentPane();
+		BoxLayout containerLayout = new BoxLayout(container, BoxLayout.PAGE_AXIS);
+		container.setLayout(containerLayout);
 
 		// Add carbohydrate percentage
 		carbohydratePercentageLabel = new JLabel("Carbohydrate percentage wished by meal :");
@@ -100,7 +101,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		carbohydratePercentageTextField.addFocusListener(this);
 		container.add(carbohydratePercentageTextField);
 		carbohydratePercentageSlider = new JSlider(JSlider.HORIZONTAL, (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MIN * 100), (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MAX * 100), (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MIN * 100));
-		carbohydratePercentageSlider.setMajorTickSpacing(5);
+		carbohydratePercentageSlider.setMajorTickSpacing(1);
 		carbohydratePercentageSlider.setMinorTickSpacing(1);
 		carbohydratePercentageSlider.setPaintTicks(true);
 		carbohydratePercentageSlider.setPaintLabels(true);
@@ -130,7 +131,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		lipidPercentageTextField.addFocusListener(this);
 		container.add(lipidPercentageTextField);
 		lipidPercentageSlider = new JSlider(JSlider.HORIZONTAL, (int)(MealRepartition.LIPID_PERCENTAGE_MIN * 100), (int)(MealRepartition.LIPID_PERCENTAGE_MAX * 100), (int)(MealRepartition.LIPID_PERCENTAGE_MIN * 100));
-		lipidPercentageSlider.setMajorTickSpacing(5);
+		lipidPercentageSlider.setMajorTickSpacing(1);
 		lipidPercentageSlider.setMinorTickSpacing(1);
 		lipidPercentageSlider.setPaintTicks(true);
 		lipidPercentageSlider.setPaintLabels(true);
@@ -149,12 +150,13 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		container.add(okBtn);
 
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 	}
 
 
 	/**
-	 * Get the user data and return the corresponding mealrepartition object.
-	 * @return The mealrepartition object corresponding to the user data.
+	 * Get the user data and return the corresponding MealRepartition object.
+	 * @return The MealRepartition object corresponding to the user data.
 	 * @throws BadCarbohydratePercentageException
 	 * @throws BadLipidPercentageException
 	 * @throws BadProteinPercentageException

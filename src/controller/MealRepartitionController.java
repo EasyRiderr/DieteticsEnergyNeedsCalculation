@@ -73,6 +73,8 @@ public class MealRepartitionController {
 		model.setTakeASnack(mr.isTakeASnack());
 		model.checkRepartition();
 		
+		model.displayObservers();
+		
 		view.close();
 	}
 }

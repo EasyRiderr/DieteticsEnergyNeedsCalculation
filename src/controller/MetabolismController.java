@@ -15,6 +15,7 @@ import model.metabolism.IncoherentLpaException;
 import model.metabolism.IncoherentWeightException;
 import model.metabolism.Metabolism;
 import view.MetabolismGUI;
+import view.ResultsGUI;
 
 
 /**
@@ -68,6 +69,8 @@ public class MetabolismController {
 			mr.setEnergyNeeds(model.getEnergyNeeds());
 			MealRepartitionController mrc = new MealRepartitionController(mr);
 			mrc.display();
+			ResultsGUI r = new ResultsGUI();
+			mr.setObservers(r);
 		} catch(Exception e) {
 			throw e;
 		}
