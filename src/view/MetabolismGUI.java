@@ -1,25 +1,28 @@
 /*
  * MetabolismGUI.java
- * 
+ *
  * The GUI representing the Metabolism.
- * 29/01/2014 
+ * 29/01/2014
  */
 
 
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -30,7 +33,7 @@ import model.metabolism.Metabolism;
 
 /**
  * The GUI representing the Metabolism.
- * 
+ *
  * @author Yoan DUMAS
  * @version 1.0
  * @see Metabolism
@@ -44,6 +47,9 @@ public class MetabolismGUI implements ActionListener {
 	/** The OK button. */
 	private JButton okBtn;
 
+
+	/** Panel to manage the layout of textfields and labels. */
+	private JPanel tfPanel = new JPanel();
 
 	/** The text field for the age of the patient. */
 	private JTextField ageTextField;
@@ -67,6 +73,9 @@ public class MetabolismGUI implements ActionListener {
 
 	/** The button group allowing to know the gender of the patient. */
 	private ButtonGroup bg = new ButtonGroup();
+
+	/** The panel containing radio buttons and associated images. */
+	private JPanel rbPanel = new JPanel();
 
 
 	/** Radio buttons to choose the gender of the patient. */
@@ -95,81 +104,72 @@ public class MetabolismGUI implements ActionListener {
 	 * Create the content of the view.
 	 */
 	private void createContent() {
-		// TODO refaire le layout...
 		// Set properties to the frame
-		frame = new JFrame("Dietetics Energy needs calcultaion.");
+		frame = new JFrame("Dietetics Energy needs calculation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new GridBagLayout());
-		frame.setLocationRelativeTo(null);
-		GridBagConstraints c = new GridBagConstraints();
+		frame.setLayout(new BorderLayout());
 		Container container = frame.getContentPane();
 
 		// Add Radio buttons
 		femaleButton = new JRadioButton();
 		bg.add(femaleButton);
-		c.gridx = 0;
-		c.gridy = 0;
-		container.add(femaleButton, c);
+		rbPanel.add(femaleButton);
+		JLabel femaleImg = new JLabel(new ImageIcon("img/femaleSign.jpg"));
+		rbPanel.add(femaleImg);
+
 		maleButton = new JRadioButton();
 		bg.add(maleButton);
-		c.gridx = 2;
-		c.gridy = 0;
-		container.add(maleButton, c);
-
-		// Add images to the JRadio
-		JLabel femaleImg = new JLabel(new ImageIcon("img/femaleSign.jpg"));
-		c.gridx = 1;
-		container.add(femaleImg, c);
+		rbPanel.add(maleButton);
 		JLabel maleImg = new JLabel(new ImageIcon("img/maleSign.jpg"));
-		c.gridx = 3;
-		container.add(maleImg, c);
+		rbPanel.add(maleImg);
+		container.add(rbPanel, BorderLayout.NORTH);
 
+		tfPanel.setLayout(new BoxLayout(tfPanel, BoxLayout.PAGE_AXIS));
+
+		JPanel agePan = new JPanel();
+		agePan.setLayout(new BoxLayout(agePan, BoxLayout.LINE_AXIS));
 		// Add the age field
 		ageLabel = new JLabel("Age : ");
-		c.gridx = 0;
-		c.gridy = 1;
-		c.gridwidth = 2;
-		container.add(ageLabel, c);
-		ageTextField = new JTextField(5);
-		c.gridx = 2;
-		container.add(ageTextField, c);
+		agePan.add(ageLabel);
+		agePan.add(Box.createHorizontalGlue());
+		ageTextField = new JTextField(3);
+		ageTextField.setMaximumSize(new Dimension(10, 20));
+		agePan.add(ageTextField);
+		tfPanel.add(agePan);
 
 		// Add the weight fields.
+		JPanel weightPan = new JPanel();
+		weightPan.setLayout(new BoxLayout(weightPan, BoxLayout.LINE_AXIS));
 		weightLabel = new JLabel("Weight : ");
-		c.gridx = 0;
-		c.gridy = 2;
-		container.add(weightLabel, c);
-		weightTextField = new JTextField(5);
-		c.gridx = 2;
-		container.add(weightTextField, c);
+		weightPan.add(weightLabel);
+		weightPan.add(Box.createHorizontalGlue());
+		weightTextField = new JTextField(3);
+		weightTextField.setMaximumSize(new Dimension(10, 20));
+		weightPan.add(weightTextField);
+		tfPanel.add(weightPan);
 
+		//TODO terminer la modif de layout
 		// Add the height fields
 		heightLabel = new JLabel("Height : ");
-		c.gridx = 0;
-		c.gridy = 3;
-		container.add(heightLabel, c);
+		tfPanel.add(heightLabel);
 		heightTextField = new JTextField(5);
-		c.gridx = 2;
-		container.add(heightTextField, c);
+		tfPanel.add(heightTextField);
 
 		// Add the level of physical activities fields
 		lpaLabel = new JLabel("Level of physical activies : ");
-		c.gridx = 0;
-		c.gridy = 4;
-		container.add(lpaLabel, c);
+		tfPanel.add(lpaLabel);
 		lpaTextField = new JTextField(5);
-		c.gridx = 2;
-		container.add(lpaTextField, c);
+		tfPanel.add(lpaTextField);
+		container.add(tfPanel, BorderLayout.CENTER);
 
 
 		// Add the Ok button to the frame
 		okBtn = new JButton("Ok");
 		okBtn.addActionListener(this);
-		c.gridx = 3;
-		c.gridy = 5;
-		container.add(okBtn, c);
+		container.add(okBtn, BorderLayout.SOUTH);
 
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 	}
 
 
