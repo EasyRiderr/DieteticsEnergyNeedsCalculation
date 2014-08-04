@@ -148,18 +148,27 @@ public class MetabolismGUI implements ActionListener {
 		weightPan.add(weightTextField);
 		tfPanel.add(weightPan);
 
-		//TODO terminer la modif de layout
 		// Add the height fields
+		JPanel heightPan = new JPanel();
+		heightPan.setLayout(new BoxLayout(heightPan, BoxLayout.LINE_AXIS));
 		heightLabel = new JLabel("Height : ");
-		tfPanel.add(heightLabel);
-		heightTextField = new JTextField(5);
-		tfPanel.add(heightTextField);
+		heightPan.add(heightLabel);
+		heightPan.add(Box.createHorizontalGlue());
+		heightTextField = new JTextField(3);
+		heightTextField.setMaximumSize(new Dimension(10, 20));
+		heightPan.add(heightTextField);
+		tfPanel.add(heightPan);
 
 		// Add the level of physical activities fields
+		JPanel lpaPanel = new JPanel();
+		lpaPanel.setLayout(new BoxLayout(lpaPanel, BoxLayout.LINE_AXIS));
 		lpaLabel = new JLabel("Level of physical activies : ");
-		tfPanel.add(lpaLabel);
-		lpaTextField = new JTextField(5);
-		tfPanel.add(lpaTextField);
+		lpaPanel.add(lpaLabel);
+		lpaPanel.add(Box.createHorizontalGlue());
+		lpaTextField = new JTextField(3);
+		lpaTextField.setMaximumSize(new Dimension(10, 20));
+		lpaPanel.add(lpaTextField);
+		tfPanel.add(lpaPanel);
 		container.add(tfPanel, BorderLayout.CENTER);
 
 
