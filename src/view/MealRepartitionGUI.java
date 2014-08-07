@@ -1,25 +1,28 @@
 /*
  * MealRepartitionGUI.java
- * 
+ *
  * The GUI representing the MealRepartition.
- * 28/02/2014 
+ * 28/02/2014
  */
 
 
 package view;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -34,13 +37,13 @@ import model.mealRepartition.MealRepartition;
 
 /**
  * The GUI representing the MealRepartition.
- * 
+ *
  * @author Yoan DUMAS
  * @version 1.0
  * @see MealRepartition
  */
 public class MealRepartitionGUI implements ActionListener, FocusListener, ChangeListener {
-	
+
 	/** The frame of the GUI. */
 	private JFrame frame;
 
@@ -94,12 +97,18 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		container.setLayout(containerLayout);
 
 		// Add carbohydrate percentage
+		JPanel carboHydratePan = new JPanel();
+		carboHydratePan.setLayout(new BoxLayout(carboHydratePan, BoxLayout.LINE_AXIS));
 		carbohydratePercentageLabel = new JLabel("Carbohydrate percentage wished by meal :");
-		container.add(carbohydratePercentageLabel);
-		carbohydratePercentageTextField = new JTextField(5);
+		carboHydratePan.add(carbohydratePercentageLabel);
+		carboHydratePan.add(Box.createHorizontalGlue());
+		carbohydratePercentageTextField = new JTextField(3);
+		carbohydratePercentageTextField.setMaximumSize(new Dimension(10, 20));
 		carbohydratePercentageTextField.setText("" + (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MIN * 100));
 		carbohydratePercentageTextField.addFocusListener(this);
-		container.add(carbohydratePercentageTextField);
+		carboHydratePan.add(carbohydratePercentageTextField);
+		container.add(carboHydratePan);
+
 		carbohydratePercentageSlider = new JSlider(JSlider.HORIZONTAL, (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MIN * 100), (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MAX * 100), (int)(MealRepartition.CARBOHYDRATE_PERCENTAGE_MIN * 100));
 		carbohydratePercentageSlider.setMajorTickSpacing(1);
 		carbohydratePercentageSlider.setMinorTickSpacing(1);
@@ -109,12 +118,18 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		container.add(carbohydratePercentageSlider);
 
 		// Add protein percentage
+		JPanel proteinPercentagePan = new JPanel();
+		proteinPercentagePan.setLayout(new BoxLayout(proteinPercentagePan, BoxLayout.LINE_AXIS));
 		proteinPercentageLabel = new JLabel("Protein percentage wished by meal :");
-		container.add(proteinPercentageLabel);
-		proteinPercentageTextField = new JTextField(5);
+		proteinPercentagePan.add(proteinPercentageLabel);
+		proteinPercentagePan.add(Box.createHorizontalGlue());
+		proteinPercentageTextField = new JTextField(3);
+		proteinPercentageTextField.setMaximumSize(new Dimension(10, 20));
 		proteinPercentageTextField.setText("" + (int)(MealRepartition.PROTEIN_PERCENTAGE_MAX * 100));
 		proteinPercentageTextField.addFocusListener(this);
-		container.add(proteinPercentageTextField);
+		proteinPercentagePan.add(proteinPercentageTextField);
+		container.add(proteinPercentagePan);
+
 		proteinPercentageSlider = new JSlider(JSlider.HORIZONTAL, (int)(MealRepartition.PROTEIN_PERCENTAGE_MIN * 100), (int)(MealRepartition.PROTEIN_PERCENTAGE_MAX * 100), (int)(MealRepartition.PROTEIN_PERCENTAGE_MAX * 100));
 		proteinPercentageSlider.setMajorTickSpacing(1);
 		proteinPercentageSlider.setMinorTickSpacing(1);
@@ -124,12 +139,18 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		container.add(proteinPercentageSlider);
 
 		// Add lipid percentage
+		JPanel lipidPercentagePan = new JPanel();
+		lipidPercentagePan.setLayout(new BoxLayout(lipidPercentagePan, BoxLayout.LINE_AXIS));
 		lipidPercentageLabel = new JLabel("Lipid percentage wished by meal :");
-		container.add(lipidPercentageLabel);
-		lipidPercentageTextField = new JTextField(5);
+		lipidPercentagePan.add(lipidPercentageLabel);
+		lipidPercentagePan.add(Box.createHorizontalGlue());
+		lipidPercentageTextField = new JTextField(3);
+		lipidPercentageTextField.setMaximumSize(new Dimension(10, 20));
 		lipidPercentageTextField.setText("" + (int)(MealRepartition.LIPID_PERCENTAGE_MIN * 100));
 		lipidPercentageTextField.addFocusListener(this);
-		container.add(lipidPercentageTextField);
+		lipidPercentagePan.add(lipidPercentageTextField);
+		container.add(lipidPercentagePan);
+
 		lipidPercentageSlider = new JSlider(JSlider.HORIZONTAL, (int)(MealRepartition.LIPID_PERCENTAGE_MIN * 100), (int)(MealRepartition.LIPID_PERCENTAGE_MAX * 100), (int)(MealRepartition.LIPID_PERCENTAGE_MIN * 100));
 		lipidPercentageSlider.setMajorTickSpacing(1);
 		lipidPercentageSlider.setMinorTickSpacing(1);
@@ -139,10 +160,14 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		container.add(lipidPercentageSlider);
 
 		// Add take a snack checkbox
-		takeASnackLabel = new JLabel("Patient take a snack");
-		container.add(takeASnackLabel);
+		JPanel snackPan = new JPanel();
+		snackPan.setLayout(new BoxLayout(snackPan, BoxLayout.LINE_AXIS));
+		takeASnackLabel = new JLabel("The patient take a snack");
+		snackPan.add(takeASnackLabel);
 		takeASnackCheckBox = new JCheckBox();
-		container.add(takeASnackCheckBox);
+		snackPan.add(takeASnackCheckBox);
+		snackPan.add(Box.createHorizontalGlue());
+		container.add(snackPan);
 
 		// Add the Ok button to the frame
 		okBtn = new JButton("Ok");
@@ -167,7 +192,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		mr.setLipidPercentage(lipidPercentageSlider.getValue() / 100.);
 		mr.setProteinPercentage(proteinPercentageSlider.getValue() / 100.);
 		mr.setTakeASnack(takeASnackCheckBox.isSelected());
-		
+
 		return mr;
 	}
 
