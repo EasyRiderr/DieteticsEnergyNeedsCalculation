@@ -116,6 +116,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		carbohydratePercentageSlider.setPaintLabels(true);
 		carbohydratePercentageSlider.addChangeListener(this);
 		container.add(carbohydratePercentageSlider);
+		container.add(Box.createVerticalGlue());
 
 		// Add protein percentage
 		JPanel proteinPercentagePan = new JPanel();
@@ -137,6 +138,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		proteinPercentageSlider.setPaintLabels(true);
 		proteinPercentageSlider.addChangeListener(this);
 		container.add(proteinPercentageSlider);
+		container.add(Box.createVerticalGlue());
 
 		// Add lipid percentage
 		JPanel lipidPercentagePan = new JPanel();
@@ -158,6 +160,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		lipidPercentageSlider.setPaintLabels(true);
 		lipidPercentageSlider.addChangeListener(this);
 		container.add(lipidPercentageSlider);
+		container.add(Box.createVerticalGlue());
 
 		// Add take a snack checkbox
 		JPanel snackPan = new JPanel();
@@ -174,7 +177,7 @@ public class MealRepartitionGUI implements ActionListener, FocusListener, Change
 		okBtn.addActionListener(this);
 		container.add(okBtn);
 
-		frame.pack();
+		frame.setSize(new Dimension(450, 400));
 		frame.setLocationRelativeTo(null);
 	}
 
