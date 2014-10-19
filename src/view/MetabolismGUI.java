@@ -114,13 +114,13 @@ public class MetabolismGUI implements ActionListener {
 		femaleButton = new JRadioButton();
 		bg.add(femaleButton);
 		rbPanel.add(femaleButton);
-		JLabel femaleImg = new JLabel(new ImageIcon("img/femaleSign.jpg"));
+		JLabel femaleImg = new JLabel(new ImageIcon(getClass().getResource("/femaleSign.jpg")));
 		rbPanel.add(femaleImg);
 
 		maleButton = new JRadioButton();
 		bg.add(maleButton);
 		rbPanel.add(maleButton);
-		JLabel maleImg = new JLabel(new ImageIcon("img/maleSign.jpg"));
+		JLabel maleImg = new JLabel(new ImageIcon(getClass().getResource("/maleSign.jpg")));
 		rbPanel.add(maleImg);
 		container.add(rbPanel, BorderLayout.NORTH);
 
